@@ -1,4 +1,14 @@
+﻿using Microsoft.EntityFrameworkCore;
+using GameAdminPanel.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Citim adresa din appsettings.json
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Îi spunem aplicației să folosească SQL Server cu acea adresă
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
